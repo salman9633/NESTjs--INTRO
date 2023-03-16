@@ -1,0 +1,16 @@
+//LIST ALL MESSAGES
+# GET http://localhost:3000/messages
+
+//CREATE  NEW MESSAGES
+
+POST http://localhost:3000/messages
+
+Content-Type: application/json
+
+{
+    "content": "New Messages"
+}
+
+//GET A MESSAGE
+
+GET http://localhost:3000/messages/1
