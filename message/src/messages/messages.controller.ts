@@ -4,10 +4,7 @@ import { MessagesService } from "./messages.service";
 @Controller('messages')
 export class MessagesController {
 
-    messagesService:MessagesService
-    constructor(){
-        this.messagesService=new MessagesService()
-    }
+    constructor(public messagesService: MessagesService) { }
 
     @Get()
     listMessages() {
@@ -22,14 +19,14 @@ export class MessagesController {
     }
     @Get('/:id')
     async getMessage(@Param('id') id: string) {
-       const message=await this.messagesService.findOne(id);
+        const message = await this.messagesService.findOne(id);
         console.log(message);
-        
-       if(!message){
-        throw new NotFoundException("MESSAGE NOT FOUND");
-       }
 
-       return message
-        
+        if (!message) {
+            throw new NotFoundException("MESSAGE NOT FOUND");
+        }
+
+        return message
+
     }
 }
