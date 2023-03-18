@@ -25,8 +25,8 @@ export class MessageRepository {
             content
         }
 
-        let newMsg=await writeFile('message.json',JSON.stringify(messages))
-        console.log(newMsg);
+        await writeFile('messages.json',JSON.stringify(messages))
+        
         
     }
 
