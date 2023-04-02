@@ -1,5 +1,6 @@
 /message/node_modules
 /message/dist
+/message/test
 
 
 /nestIntro/node_modules
@@ -7,3 +8,10 @@
 /nestIntro2.0/node_modules
 
 /diexample/node_modules
+/diexample/test
+/diexample/.prettierrc
+
+/car-value/node_modules
+/car-value/test
+/car-value/.prettierrc
+/car-value/db.sqlite
