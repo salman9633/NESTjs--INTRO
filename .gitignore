@@ -13,5 +13,6 @@
 
 /car-value/node_modules
 /car-value/test
+/car-value/dist
 /car-value/.prettierrc
 /car-value/db.sqlite

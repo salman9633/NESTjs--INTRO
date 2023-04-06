@@ -2,14 +2,19 @@ import { Body, Controller,Get,Param,Post, Query,Delete, Patch } from '@nestjs/co
 import { createUserDto } from './dtos/create-user.dtos';
 import { UpdateUser } from "./dtos/update-user.dto";
 import { UsersService } from './users.service';
+import { AuthUserService } from './auth.service';
 
 @Controller('auth')
 export class UsersController {
-    constructor(private userService:UsersService){}
+    constructor(
+        private userService:UsersService,
+        private authUserService:AuthUserService
+        ){}
 
     @Post('/signup')//create User
     createUser(@Body() body:createUserDto){
-        this.userService.create(body.email,body.password)    
+        // this.userService.create(body.email,body.password) <code before putting the auth service>
+        return this.authUserService.signUp(body.email,body.password)
     }
 
     @Get('/user/:id')//Get particular user
