@@ -4,6 +4,7 @@ import * as bcrypt from "bcryptjs";
 
 
 
+
 @Injectable()
 export class AuthUserService {
     constructor(private usersService: UsersService){}
@@ -27,5 +28,19 @@ export class AuthUserService {
         return user
     }
 
-    signIn(){}
+    async signIn(email:string,password:string){
+        const [user]= await this.usersService.findAll(email)
+        if(!user){
+            return "user not found"
+        }
+
+        const isMatch=await bcrypt.compare(password,user.password)
+
+        if(!isMatch){
+            return "Incorrect password"
+        }
+
+        return user
+
+    }
 }
