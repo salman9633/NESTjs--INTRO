@@ -16,3 +16,8 @@
 /car-value/dist
 /car-value/.prettierrc
 /car-value/db.sqlite
+
+
+/mongo-DBtest/node_modules
+/mongo-DBtest/test
+/mongo-DBtest/.prettierrc
