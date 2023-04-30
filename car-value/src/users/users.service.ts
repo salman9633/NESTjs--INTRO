@@ -19,6 +19,9 @@ async create(email:string,password:string){
 }
 
 findOne(id:any){
+    if(!id){
+        return null
+    }
     return this.repo.findOneBy({id});
 }
 

@@ -9,7 +9,7 @@ import * as bcrypt from "bcryptjs";
 export class AuthUserService {
     constructor(private usersService: UsersService){}
 
-    async signUp(email:string, password:string){
+    async signUp(email:string, password:string):Promise<any>{
         //user email checking
         const users=await this.usersService.findAll(email)
 
@@ -28,7 +28,7 @@ export class AuthUserService {
         return user
     }
 
-    async signIn(email:string,password:string){
+    async signIn(email:string,password:string):Promise<any>{
         const [user]= await this.usersService.findAll(email)
         if(!user){
             return "user not found"

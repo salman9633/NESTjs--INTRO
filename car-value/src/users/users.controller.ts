@@ -1,25 +1,45 @@
-import { Body, Controller,Get,Param,Post, Query,Delete, Patch } from '@nestjs/common';
+import { Body, Controller,Get,Param,Post, Query,Delete, Patch, Session } from '@nestjs/common';
 import { createUserDto } from './dtos/create-user.dtos';
 import { UpdateUser } from "./dtos/update-user.dto";
 import { UsersService } from './users.service';
 import { AuthUserService } from './auth.service';
 
 @Controller('auth')
+
 export class UsersController {
     constructor(
         private userService:UsersService,
         private authUserService:AuthUserService
         ){}
 
+  
+
     @Post('/signup')//create User
-    createUser(@Body() body:createUserDto){
+    async createUser(@Body() body:createUserDto, @Session() Session:any){
+        
         // this.userService.create(body.email,body.password) <code before putting the auth service>
-        return this.authUserService.signUp(body.email,body.password)
+        var user=await this.authUserService.signUp(body.email,body.password)
+        console.log(user);
+        Session.userId=user.id;
+        console.log(Session);
+        return user 
+    }
+    
+    @Post('/signin')
+    async signin(@Body() body:createUserDto,@Session() session:any){
+        var user=await this.authUserService.signIn(body.email,body.password)
+        session.userId=user.id;
+        console.log(session);
+        return user;
+    }
+    @Get('/whoAmI')
+    loggedInUser(@Session() Session:any){
+        return this.userService.findOne(Session.userId)
     }
 
-    @Post('/signin')
-    signin(@Body() body:createUserDto){
-        return this.authUserService.signIn(body.email,body.password)
+    @Get('/signout')
+    signOut(@Session() session:any){
+        session.userId=null
     }
 
     @Get('/user/:id')//Get particular user
